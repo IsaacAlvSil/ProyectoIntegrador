@@ -9,6 +9,7 @@ import HomeScreen from '../screens/HomeScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import NotificationsScreen from '../screens/NotificationsScreen';
 import RequestsScreen from '../screens/RequestsScreen';
+import DVacante from '../screens/DVacante';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -50,7 +51,21 @@ export default function AppNavigation({ isLoggedIn, onLogin }) {
                     <Stack.Screen name="SignUp" component={SignUpScreen} />
                 </>
             ) : (
-                <Stack.Screen name="Main" component={MainTabs} />
+                <>
+
+                    <Stack.Screen name="Main" component={MainTabs} />
+
+                    <Stack.Screen
+                        name="DVacante"
+                        component={DVacante}
+                        options={{
+                            headerShown: true,
+                            title: 'Detalle de Vacante',
+                            headerStyle: { backgroundColor: '#0F172A' }, 
+                            headerTintColor: '#fff'
+                        }}
+                    />
+                </>
             )}
         </Stack.Navigator>
     );
