@@ -12,12 +12,8 @@ import {
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 
-const SignUpScreen = ({ navigation }) => {
-    // Estados para guardar lo que el usuario escribe
-    const [nombre, setNombre] = useState('');
+const RecoverPasswordScreen = ({ navigation }) => {
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
 
     return (
         <KeyboardAvoidingView
@@ -33,24 +29,15 @@ const SignUpScreen = ({ navigation }) => {
                     showsVerticalScrollIndicator={false}
                 >
                     <View style={styles.card}>
+                        {/* Icono de candado / seguridad */}
                         <View style={styles.iconHeader}>
-                            <Ionicons name="person-add" size={40} color="#0F172A" />
+                            <Ionicons name="lock-closed" size={40} color="#0F172A" />
                         </View>
 
-                        <Text style={styles.title}>Registro de Candidato</Text>
-                        <Text style={styles.subtitle}>Crea tu cuenta para encontrar las mejores vacantes</Text>
-
-                        {/* Campo: Nombre */}
-                        <View style={styles.inputContainer}>
-                            <Ionicons name="person-outline" size={20} color="#64748B" style={styles.inputIcon} />
-                            <TextInput
-                                style={styles.input}
-                                placeholder="Nombre completo"
-                                placeholderTextColor="#94A3B8"
-                                value={nombre}
-                                onChangeText={setNombre}
-                            />
-                        </View>
+                        <Text style={styles.title}>Recuperar Contraseña</Text>
+                        <Text style={styles.subtitle}>
+                            Ingresa el correo electrónico asociado a tu cuenta y te enviaremos las instrucciones para restablecerla.
+                        </Text>
 
                         {/* Campo: Correo */}
                         <View style={styles.inputContainer}>
@@ -66,47 +53,22 @@ const SignUpScreen = ({ navigation }) => {
                             />
                         </View>
 
-                        {/* Campo: Contraseña */}
-                        <View style={styles.inputContainer}>
-                            <Ionicons name="lock-closed-outline" size={20} color="#64748B" style={styles.inputIcon} />
-                            <TextInput
-                                style={styles.input}
-                                placeholder="Contraseña"
-                                placeholderTextColor="#94A3B8"
-                                secureTextEntry
-                                value={password}
-                                onChangeText={setPassword}
-                            />
-                        </View>
-
-                        {/* Campo: Confirmar Contraseña */}
-                        <View style={styles.inputContainer}>
-                            <Ionicons name="shield-checkmark-outline" size={20} color="#64748B" style={styles.inputIcon} />
-                            <TextInput
-                                style={styles.input}
-                                placeholder="Confirmar contraseña"
-                                placeholderTextColor="#94A3B8"
-                                secureTextEntry
-                                value={confirmPassword}
-                                onChangeText={setConfirmPassword}
-                            />
-                        </View>
-
-                        {/* Botón Principal: Crear Cuenta */}
+                        {/* Botón Principal */}
                         <TouchableOpacity
                             style={styles.primaryButton}
-                            onPress={() => console.log('Crear cuenta presionado')}
+                            onPress={() => console.log('Enviar correo de recuperación a:', email)}
                         >
-                            <Text style={styles.primaryButtonText}>Crear Cuenta</Text>
+                            <Text style={styles.primaryButtonText}>Enviar Instrucciones</Text>
                         </TouchableOpacity>
 
-                        {/* Botón Secundario: Volver al Login */}
-                        <View style={styles.footerRow}>
-                            <Text style={styles.footerText}>¿Ya tienes una cuenta? </Text>
-                            <TouchableOpacity onPress={() => navigation.goBack()}>
-                                <Text style={styles.linkText}>Inicia Sesión</Text>
-                            </TouchableOpacity>
-                        </View>
+                        {/* Botón para regresar al Login */}
+                        <TouchableOpacity
+                            style={styles.backButton}
+                            onPress={() => navigation.goBack()}
+                        >
+                            <Ionicons name="arrow-back" size={16} color="#64748B" />
+                            <Text style={styles.backButtonText}>Volver al Login</Text>
+                        </TouchableOpacity>
                     </View>
                 </ScrollView>
             </LinearGradient>
@@ -150,7 +112,7 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontWeight: 'bold',
         color: '#0F172A',
-        marginBottom: 8,
+        marginBottom: 10,
         textAlign: 'center'
     },
     subtitle: {
@@ -158,7 +120,8 @@ const styles = StyleSheet.create({
         color: '#64748B',
         marginBottom: 30,
         textAlign: 'center',
-        paddingHorizontal: 10,
+        lineHeight: 20,
+        paddingHorizontal: 5,
     },
     inputContainer: {
         flexDirection: 'row',
@@ -168,7 +131,7 @@ const styles = StyleSheet.create({
         borderColor: '#E2E8F0',
         borderRadius: 10,
         paddingHorizontal: 15,
-        marginBottom: 15,
+        marginBottom: 20,
         width: '100%',
         height: 50,
     },
@@ -181,12 +144,12 @@ const styles = StyleSheet.create({
         fontSize: 15,
     },
     primaryButton: {
-        backgroundColor: '#3B82F6', // Un azul vibrante para invitar a la acción
+        backgroundColor: '#3B82F6',
         paddingVertical: 15,
         borderRadius: 10,
         width: '100%',
         alignItems: 'center',
-        marginTop: 10,
+        marginBottom: 25,
         shadowColor: '#3B82F6',
         shadowOffset: { width: 0, height: 4 },
         shadowOpacity: 0.3,
@@ -198,20 +161,17 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold'
     },
-    footerRow: {
+    backButton: {
         flexDirection: 'row',
-        marginTop: 25,
         alignItems: 'center',
+        padding: 10,
     },
-    footerText: {
+    backButtonText: {
         color: '#64748B',
         fontSize: 14,
-    },
-    linkText: {
-        color: '#0F172A',
-        fontSize: 14,
-        fontWeight: 'bold',
+        fontWeight: '600',
+        marginLeft: 6,
     }
 });
 
-export default SignUpScreen;
+export default RecoverPasswordScreen;

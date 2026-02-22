@@ -10,6 +10,7 @@ import ProfileScreen from '../screens/ProfileScreen';
 import NotificationsScreen from '../screens/NotificationsScreen';
 import RequestsScreen from '../screens/RequestsScreen';
 import DVacante from '../screens/DVacante';
+import RecoverPasswordScreen from '../screens/RecoverPasswordScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -49,6 +50,7 @@ export default function AppNavigation({ isLoggedIn, onLogin }) {
                         {(props) => <LoginScreen {...props} onLogin={onLogin} />}
                     </Stack.Screen>
                     <Stack.Screen name="SignUp" component={SignUpScreen} />
+                    <Stack.Screen name="RecoverPassword" component={RecoverPasswordScreen} />
                 </>
             ) : (
                 <>
@@ -61,7 +63,7 @@ export default function AppNavigation({ isLoggedIn, onLogin }) {
                         options={{
                             headerShown: true,
                             title: 'Detalle de Vacante',
-                            headerStyle: { backgroundColor: '#0F172A' }, 
+                            headerStyle: { backgroundColor: '#0F172A' },
                             headerTintColor: '#fff'
                         }}
                     />

@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-nati
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 
-const HomeScreen = () => {
+const HomeScreen = ({ navigation }) => {
     return (
         <LinearGradient
             colors={['#0F172A', '#1E293B', '#334155']}
@@ -16,7 +16,7 @@ const HomeScreen = () => {
                         <Text style={styles.greeting}>Hola, Isaac</Text>
                         <Text style={styles.subtitle}>Tu radar ejecutivo está activo</Text>
                     </View>
-                    <TouchableOpacity style={styles.profileIcon}>
+                    <TouchableOpacity onPress={() => navigation.navigate('Perfil')} style={styles.profileIcon}>
                         <Text style={styles.profileInitials}>IS</Text>
                     </TouchableOpacity>
                 </View>
@@ -41,7 +41,7 @@ const HomeScreen = () => {
 
                 <View style={styles.sectionHeader}>
                     <Text style={styles.sectionTitle}>Oportunidades Top Match</Text>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigation.navigate('Solicitudes')}>
                         <Text style={styles.seeAll}>Ver todas</Text>
                     </TouchableOpacity>
                 </View>

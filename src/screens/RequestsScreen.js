@@ -73,7 +73,7 @@ const VacancyCard = ({ item, navigation }) => (
                 </View>
             )}
         </View>
-        
+
         <View style={styles.infoRow}><MaterialCommunityIcons name="office-building" size={16} color="#64748B" /><Text style={styles.infoText}>{item.company}</Text></View>
         <View style={styles.infoRow}><Ionicons name="location-outline" size={16} color="#64748B" /><Text style={styles.infoText}>{item.location}</Text></View>
         <View style={styles.infoRow}><Ionicons name="cash-outline" size={16} color="#64748B" /><Text style={styles.infoText}>{item.salary}</Text></View>
@@ -84,7 +84,7 @@ const VacancyCard = ({ item, navigation }) => (
         <View style={styles.cardFooter}>
             <Text style={styles.footerText}>🕒 {item.time}  •  {item.applicants} postulantes</Text>
 
-            <TouchableOpacity 
+            <TouchableOpacity
                 style={styles.detailsButton}
                 onPress={() => navigation.navigate('DVacante', { vacante: item })}
             >
@@ -94,19 +94,16 @@ const VacancyCard = ({ item, navigation }) => (
     </View>
 );
 
-// 3. Pantalla Principal (Recibe navigation de los props)
 const RequestsScreen = ({ navigation }) => {
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: '#0F172A' }}>
             <LinearGradient colors={['#0F172A', '#1E293B', '#334155']} style={styles.container}>
-                
-                {/* Header Superior */}
+
                 <View style={styles.header}>
                     <Text style={styles.headerTitle}>Vacantes</Text>
                     <View style={{ width: 24 }} />
                 </View>
 
-                {/* Buscador */}
                 <View style={styles.searchSection}>
                     <View style={styles.searchBar}>
                         <Ionicons name="search" size={20} color="#64748B" />
@@ -117,7 +114,6 @@ const RequestsScreen = ({ navigation }) => {
                     </TouchableOpacity>
                 </View>
 
-                {/* Contador y Ordenar */}
                 <View style={styles.statsRow}>
                     <Text style={styles.statsText}>5 vacantes disponibles</Text>
                     <TouchableOpacity style={styles.sortButton}>
@@ -126,12 +122,11 @@ const RequestsScreen = ({ navigation }) => {
                     </TouchableOpacity>
                 </View>
 
-                {/* Lista de Vacantes */}
                 <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
                     {VACANCIES.map((vacancy) => (
-                        <VacancyCard 
-                            key={vacancy.id} 
-                            item={vacancy} 
+                        <VacancyCard
+                            key={vacancy.id}
+                            item={vacancy}
                             navigation={navigation}
                         />
                     ))}
@@ -144,9 +139,15 @@ const RequestsScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
     container: { flex: 1 },
-    header: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 20, paddingVertical: 15 },
+    header: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        paddingHorizontal: 20,
+        paddingVertical: 15
+    },
     headerTitle: { color: 'white', fontSize: 20, fontWeight: 'bold' },
-    
+
     searchSection: { flexDirection: 'row', paddingHorizontal: 20, gap: 10, marginBottom: 15 },
     searchBar: { flex: 1, backgroundColor: 'white', flexDirection: 'row', alignItems: 'center', paddingHorizontal: 15, borderRadius: 10, height: 48 },
     searchInput: { flex: 1, marginLeft: 10, fontSize: 15 },
@@ -163,15 +164,25 @@ const styles = StyleSheet.create({
     jobTitle: { fontSize: 18, fontWeight: '700', color: '#0F172A', flex: 1, marginRight: 10 },
     urgentBadge: { backgroundColor: '#FF4444', paddingHorizontal: 8, paddingVertical: 4, borderRadius: 6 },
     urgentText: { color: 'white', fontSize: 11, fontWeight: 'bold' },
-    
+
     infoRow: { flexDirection: 'row', alignItems: 'center', marginBottom: 8, gap: 10 },
     infoText: { color: '#475569', fontSize: 14 },
-    
+
     divider: { height: 1, backgroundColor: '#F1F5F9', marginVertical: 12 },
-    
-    cardFooter: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
+
+    cardFooter:
+    {
+        justifyContent: 'space-between', alignItems: 'center',
+        marginTop: -10
+    },
     footerText: { color: '#64748B', fontSize: 12 },
-    detailsButton: { backgroundColor: '#0F172A', paddingHorizontal: 16, paddingVertical: 8, borderRadius: 8 },
+    detailsButton: {
+        backgroundColor: '#0F172A',
+        paddingHorizontal: 16,
+        marginTop: 10,
+        paddingVertical: 8,
+        borderRadius: 8,
+    },
     detailsButtonText: { color: 'white', fontWeight: 'bold', fontSize: 13 },
 });
 

@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
-import { SafeAreaView, View, Text, Image, ScrollView, TouchableOpacity, StyleSheet} from 'react-native';
+import { View, Text, Image, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import { Ionicons } from '@expo/vector-icons';
 
 const ProfileScreen = ({ navigation }) => {
-  // Datos del usuario
   const [usuario, setUsuario] = useState({
-    nombre: 'Juan Pérez González',
+    nombre: 'Usuario',
     titulo: 'Director de Operaciones',
     area: 'Operaciones y Manufactura',
     nivel: 'Ejecutivo Senior',
-    email: 'juan.perez@auto-talento.com',
+    email: 'Usuario.16@gmail.com',
     telefono: '+52 555 123 4567',
     ubicacion: 'Querétaro, México',
     industria: 'Automotriz - Tier 1',
@@ -18,7 +19,6 @@ const ProfileScreen = ({ navigation }) => {
     añosExperiencia: 15,
   });
 
-  // Experiencia Laboral
   const [experiencia, setExperiencia] = useState([
     {
       id: 1,
@@ -38,102 +38,38 @@ const ProfileScreen = ({ navigation }) => {
     },
   ]);
 
-  // Certificaciones
   const [certificaciones, setCertificaciones] = useState([
-    {
-      id: 1,
-      nombre: 'Lean Six Sigma Black Belt',
-      entidad: 'ASQ',
-      año: '2024',
-      tipo: 'Mejora Continua',
-    },
-    {
-      id: 2,
-      nombre: 'PMP - Project Management',
-      entidad: 'PMI',
-      año: '2023',
-      tipo: 'Gestión de Proyectos',
-    },
-    {
-      id: 3,
-      nombre: 'IATF 16949:2016 Lead Auditor',
-      entidad: 'SGS',
-      año: '2022',
-      tipo: 'Calidad Automotriz',
-    },
-    {
-      id: 4,
-      nombre: 'VDA 6.3 - Auditor de Procesos',
-      entidad: 'TÜV',
-      año: '2021',
-      tipo: 'Calidad Automotriz',
-    },
+    { id: 1, nombre: 'Lean Six Sigma Black Belt', entidad: 'ASQ', año: '2024', tipo: 'Mejora Continua' },
+    { id: 2, nombre: 'PMP - Project Management', entidad: 'PMI', año: '2023', tipo: 'Gestión de Proyectos' },
+    { id: 3, nombre: 'IATF 16949:2016 Lead Auditor', entidad: 'SGS', año: '2022', tipo: 'Calidad Automotriz' },
   ]);
 
-  // Habilidades técnicas
   const [habilidades, setHabilidades] = useState([
     { id: 1, nombre: 'Lean Manufacturing', nivel: 'Experto' },
     { id: 2, nombre: 'IATF 16949', nivel: 'Experto' },
     { id: 3, nombre: 'Six Sigma', nivel: 'Black Belt' },
     { id: 4, nombre: 'APQP / PPAP', nivel: 'Avanzado' },
-    { id: 5, nombre: 'FMEA', nivel: 'Avanzado' },
-    { id: 6, nombre: 'Control de Procesos', nivel: 'Experto' },
   ]);
 
-  // Clientes atendidos
-  const [clientes, setClientes] = useState([
-    'BMW', 'Mercedes-Benz', 'Ford', 'Tesla', 'GM'
-  ]);
+  const [clientes, setClientes] = useState(['BMW', 'Mercedes-Benz', 'Ford', 'Tesla', 'GM']);
 
-  // Documentos
   const [documentos, setDocumentos] = useState([
-    {
-      id: 1,
-      nombre: 'Curriculum Vitae - Automotriz',
-      tipo: 'PDF',
-      fecha: '10 Feb 2026',
-      verificado: true,
-    },
-    {
-      id: 2,
-      nombre: 'Certificación IATF 16949',
-      tipo: 'PDF',
-      fecha: '05 Feb 2026',
-      verificado: true,
-    },
-    {
-      id: 3,
-      nombre: 'Resultados de Planta',
-      tipo: 'PDF',
-      fecha: '01 Feb 2026',
-      verificado: false,
-    },
-    {
-      id: 4,
-      nombre: 'Cartas de Recomendación (BMW)',
-      tipo: 'PDF',
-      fecha: '15 Ene 2026',
-      verificado: true,
-    },
+    { id: 1, nombre: 'Curriculum Vitae - Automotriz', tipo: 'PDF', fecha: '10 Feb 2026', verificado: true },
+    { id: 2, nombre: 'Certificación IATF 16949', tipo: 'PDF', fecha: '05 Feb 2026', verificado: true },
   ]);
 
-  // Progreso del perfil
-  const [progreso, setProgreso] = useState({
-    infoBasica: true,
-    experiencia: true,
-    certificaciones: true,
-    habilidades: true,
-    documentosClave: false,
-    porcentaje: 90,
-  });
+  const [progreso, setProgreso] = useState({ porcentaje: 90 });
 
-  const Seccion = ({ titulo, children, onAgregar }) => (
-    <View style={styles.seccion}>
-      <View style={styles.tituloRow}>
-        <Text style={styles.tituloSeccion}>{titulo}</Text>
+  const Seccion = ({ titulo, icon, children, onAgregar }) => (
+    <View style={styles.card}>
+      <View style={styles.sectionHeaderRow}>
+        <View style={styles.sectionTitleWrap}>
+          <Ionicons name={icon} size={20} color="#3B82F6" style={styles.sectionIcon} />
+          <Text style={styles.tituloSeccion}>{titulo}</Text>
+        </View>
         {onAgregar && (
           <TouchableOpacity onPress={onAgregar} style={styles.btnAgregar}>
-            <Text style={styles.btnAgregarTexto}>+</Text>
+            <Ionicons name="add" size={18} color="#FFFFFF" />
           </TouchableOpacity>
         )}
       </View>
@@ -142,119 +78,100 @@ const ProfileScreen = ({ navigation }) => {
   );
 
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        {/* Header del Perfil */}
-        <View style={styles.header}>
+    <LinearGradient colors={['#0F172A', '#1E293B', '#334155']} style={styles.container}>
+      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
+
+        <View style={styles.card}>
           <View style={styles.fotoContainer}>
             {usuario.foto ? (
               <Image source={{ uri: usuario.foto }} style={styles.fotoPerfil} />
             ) : (
               <View style={styles.fotoPlaceholder}>
-                <Text style={styles.fotoPlaceholderText}>
-                  {usuario.nombre.charAt(0)}
-                </Text>
+                <Text style={styles.fotoPlaceholderText}>{usuario.nombre.charAt(0)}</Text>
               </View>
             )}
+            <TouchableOpacity style={styles.editPhotoBtn}>
+              <Ionicons name="camera" size={16} color="#FFF" />
+            </TouchableOpacity>
           </View>
-          
+
           <View style={styles.infoHeader}>
             <Text style={styles.nombre}>{usuario.nombre}</Text>
+
             <View style={styles.tituloRow}>
               <Text style={styles.titulo}>{usuario.titulo}</Text>
               {usuario.verificado && (
                 <View style={styles.badgeVerificado}>
-                  <Text style={styles.badgeTexto}>✓ Verificado</Text>
+                  <Ionicons name="checkmark-circle" size={14} color="#10B981" style={{ marginRight: 4 }} />
+                  <Text style={styles.badgeTextoVerificado}>Verificado</Text>
                 </View>
               )}
             </View>
-            
-            {/* Badges de industria */}
+
             <View style={styles.badgesContainer}>
-              <View style={styles.badgeIndustria}>
-                <Text style={styles.badgeIndustriaTexto}>{usuario.area}</Text>
-              </View>
-              <View style={styles.badgeIndustria}>
-                <Text style={styles.badgeIndustriaTexto}>{usuario.nivel}</Text>
-              </View>
+              <View style={styles.badgeIndustria}><Text style={styles.badgeIndustriaTexto}>{usuario.area}</Text></View>
+              <View style={styles.badgeIndustria}><Text style={styles.badgeIndustriaTexto}>{usuario.nivel}</Text></View>
             </View>
 
             <View style={styles.contactoContainer}>
-              <Text style={styles.contactoItem}> {usuario.email}</Text>
-              <Text style={styles.contactoItem}> {usuario.telefono}</Text>
-              <Text style={styles.contactoItem}> {usuario.ubicacion}</Text>
-              <Text style={styles.contactoItem}> {usuario.industria}</Text>
+              <View style={styles.contactoRow}><Ionicons name="mail-outline" size={16} color="#64748B" /><Text style={styles.contactoItem}>{usuario.email}</Text></View>
+              <View style={styles.contactoRow}><Ionicons name="call-outline" size={16} color="#64748B" /><Text style={styles.contactoItem}>{usuario.telefono}</Text></View>
+              <View style={styles.contactoRow}><Ionicons name="location-outline" size={16} color="#64748B" /><Text style={styles.contactoItem}>{usuario.ubicacion}</Text></View>
             </View>
-            
+
             <TouchableOpacity style={styles.btnEditar}>
-              <Text style={styles.btnEditarTexto}>EDITAR PERFIL</Text>
+              <Ionicons name="pencil" size={16} color="#FFFFFF" style={{ marginRight: 8 }} />
+              <Text style={styles.btnEditarTexto}>Editar Perfil</Text>
             </TouchableOpacity>
           </View>
         </View>
 
-        {/* Completitud del Perfil */}
-        <Seccion titulo="COMPLETITUD DEL PERFIL">
-          <View style={styles.progresoContainer}>
-            <View style={styles.progresoHeader}>
-              <Text style={styles.progresoLabel}>Perfil Ejecutivo</Text>
-              <Text style={styles.progresoPorcentaje}>{progreso.porcentaje}%</Text>
-            </View>
-            <View style={styles.barraProgreso}>
-              <View 
-                style={[
-                  styles.barraProgresoFill, 
-                  { width: `${progreso.porcentaje}%` }
-                ]} 
-              />
-            </View>
-            <View style={styles.checklist}>
-              <Text style={styles.checkItem}>✓ Información básica</Text>
-              <Text style={styles.checkItem}>✓ Experiencia en automotriz</Text>
-              <Text style={styles.checkItem}>✓ Certificaciones IATF/Six Sigma</Text>
-              <Text style={styles.checkItem}>✓ Habilidades técnicas</Text>
-              <Text style={styles.checkItem}>○ Documentos de respaldo</Text>
-            </View>
+        <Seccion titulo="Completitud del Perfil" icon="pie-chart-outline">
+          <View style={styles.progresoHeader}>
+            <Text style={styles.progresoLabel}>Perfil Ejecutivo</Text>
+            <Text style={styles.progresoPorcentaje}>{progreso.porcentaje}%</Text>
+          </View>
+          <View style={styles.barraProgresoBg}>
+            <View style={[styles.barraProgresoFill, { width: `${progreso.porcentaje}%` }]} />
           </View>
         </Seccion>
 
-        {/* Experiencia Laboral */}
-        <Seccion titulo="EXPERIENCIA LABORAL" onAgregar={() => {}}>
-          {experiencia.map((item) => (
-            <View key={item.id} style={styles.itemExperiencia}>
+        <Seccion titulo="Experiencia Laboral" icon="briefcase-outline" onAgregar={() => { }}>
+          {experiencia.map((item, index) => (
+            <View key={item.id} style={[styles.itemExperiencia, index === experiencia.length - 1 && styles.noBorder]}>
               <Text style={styles.puesto}>{item.puesto}</Text>
               <Text style={styles.empresa}>{item.empresa}</Text>
-              <Text style={styles.periodo}> {item.periodo}</Text>
+              <Text style={styles.periodo}>{item.periodo}</Text>
               <Text style={styles.descripcion}>{item.descripcion}</Text>
               <View style={styles.logrosContainer}>
-                {item.logros.map((logro, index) => (
-                  <Text key={index} style={styles.logro}> {logro}</Text>
+                {item.logros.map((logro, idx) => (
+                  <View key={idx} style={styles.logroRow}>
+                    <Ionicons name="caret-forward" size={12} color="#3B82F6" />
+                    <Text style={styles.logro}>{logro}</Text>
+                  </View>
                 ))}
               </View>
             </View>
           ))}
         </Seccion>
 
-        {/* Clientes Atendidos */}
-        <Seccion titulo="CLIENTES AUTOMOTRICES" onAgregar={() => {}}>
-          <View style={styles.clientesContainer}>
+        <Seccion titulo="Clientes Automotrices" icon="car-sport-outline" onAgregar={() => { }}>
+          <View style={styles.tagsContainer}>
             {clientes.map((cliente, index) => (
-              <View key={index} style={styles.clienteBadge}>
-                <Text style={styles.clienteTexto}>{cliente}</Text>
+              <View key={index} style={styles.tagBadge}>
+                <Text style={styles.tagTexto}>{cliente}</Text>
               </View>
             ))}
           </View>
         </Seccion>
 
-        {/* Habilidades Técnicas */}
-        <Seccion titulo="COMPETENCIAS TÉCNICAS" onAgregar={() => {}}>
-          {habilidades.map((item) => (
-            <View key={item.id} style={styles.habilidadItem}>
+        <Seccion titulo="Competencias Técnicas" icon="construct-outline" onAgregar={() => { }}>
+          {habilidades.map((item, index) => (
+            <View key={item.id} style={[styles.habilidadItem, index === habilidades.length - 1 && styles.noBorder]}>
               <Text style={styles.habilidadNombre}>{item.nombre}</Text>
               <View style={[
                 styles.nivelBadge,
-                item.nivel === 'Experto' ? styles.nivelExperto :
-                item.nivel === 'Black Belt' ? styles.nivelBlackBelt :
-                styles.nivelAvanzado
+                item.nivel === 'Experto' ? styles.nivelExperto : item.nivel === 'Black Belt' ? styles.nivelBlackBelt : styles.nivelAvanzado
               ]}>
                 <Text style={styles.nivelTexto}>{item.nivel}</Text>
               </View>
@@ -262,10 +179,9 @@ const ProfileScreen = ({ navigation }) => {
           ))}
         </Seccion>
 
-        {/* Certificaciones */}
-        <Seccion titulo="CERTIFICACIONES" onAgregar={() => {}}>
-          {certificaciones.map((item) => (
-            <View key={item.id} style={styles.itemCertificacion}>
+        <Seccion titulo="Certificaciones" icon="ribbon-outline" onAgregar={() => { }}>
+          {certificaciones.map((item, index) => (
+            <View key={item.id} style={[styles.itemLista, index === certificaciones.length - 1 && styles.noBorder]}>
               <View style={styles.certHeader}>
                 <Text style={styles.certNombre}>{item.nombre}</Text>
                 <View style={styles.certTipoBadge}>
@@ -277,402 +193,149 @@ const ProfileScreen = ({ navigation }) => {
           ))}
         </Seccion>
 
-        {/* Documentos */}
-        <Seccion titulo="DOCUMENTOS" onAgregar={() => {}}>
-          {documentos.map((item) => (
-            <View key={item.id} style={styles.itemDocumento}>
-              <View style={styles.docInfo}>
-                <Text style={styles.docNombre}>{item.nombre}</Text>
-                <Text style={styles.docMeta}>
-                  {item.tipo} • {item.fecha}
-                </Text>
-              </View>
-              {item.verificado && (
-                <View style={styles.badgeVerificadoDoc}>
-                  <Text style={styles.badgeTextoDoc}>Verificado</Text>
+        <Seccion titulo="Documentos" icon="document-text-outline" onAgregar={() => { }}>
+          {documentos.map((item, index) => (
+            <View key={item.id} style={[styles.itemLista, index === documentos.length - 1 && styles.noBorder]}>
+              <View style={styles.docRow}>
+                <Ionicons name="document" size={24} color="#94A3B8" style={{ marginRight: 10 }} />
+                <View style={styles.docInfo}>
+                  <Text style={styles.docNombre}>{item.nombre}</Text>
+                  <Text style={styles.docMeta}>{item.tipo} • {item.fecha}</Text>
                 </View>
-              )}
+                {item.verificado && (
+                  <Ionicons name="checkmark-circle" size={20} color="#10B981" />
+                )}
+              </View>
             </View>
           ))}
         </Seccion>
 
-        <View style={styles.bottomSpacer} />
-      </ScrollView>
+        <TouchableOpacity
+          style={styles.btnLogout}
+          onPress={() => {
+            console.log('Cerrando sesion');
+          }}
+        >
+          <Text style={styles.btnLogoutText}>Cerrar Sesión</Text>
+        </TouchableOpacity>
 
-      {/* Bottom Navigation */}
-      <View style={styles.bottomNav}>
-        <TouchableOpacity style={styles.navItem}>
-          <Text style={styles.navIcon}></Text>
-          <Text style={styles.navText}>Inicio</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.navItem}>
-          <Text style={styles.navIcon}></Text>
-          <Text style={styles.navText}>Vacantes</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.navItem}>
-          <Text style={styles.navIcon}></Text>
-          <Text style={styles.navText}>Postulaciones</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={[styles.navItem, styles.navItemActivo]}>
-          <Text style={[styles.navIcon, styles.navIconActivo]}></Text>
-          <Text style={[styles.navText, styles.navTextActivo]}>Perfil</Text>
-        </TouchableOpacity>
-      </View>
-    </SafeAreaView>
+        <View style={{ height: 30 }} />
+      </ScrollView>
+    </LinearGradient>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#FFF',
-  },
-  header: {
+  container: { flex: 1 },
+  scrollContent: { padding: 15, paddingTop: 50 },
+
+  card: {
+    backgroundColor: '#FFFFFF',
+    borderRadius: 16,
     padding: 20,
-    backgroundColor: '#FFF',
-    borderBottomWidth: 1,
-    borderBottomColor: '#EEE',
-  },
-  fotoContainer: {
-    alignItems: 'center',
     marginBottom: 15,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 5,
+    elevation: 3,
   },
+
+  fotoContainer: { alignItems: 'center', marginBottom: 15, position: 'relative' },
   fotoPlaceholder: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
-    backgroundColor: '#002E5D',
-    justifyContent: 'center',
-    alignItems: 'center',
+    width: 90, height: 90, borderRadius: 45,
+    backgroundColor: '#0F172A',
+    justifyContent: 'center', alignItems: 'center',
+    borderWidth: 3, borderColor: '#F1F5F9',
   },
-  fotoPlaceholderText: {
-    color: '#FFF',
-    fontSize: 40,
-    fontWeight: 'bold',
+  fotoPlaceholderText: { color: '#FFFFFF', fontSize: 36, fontWeight: 'bold' },
+  editPhotoBtn: {
+    position: 'absolute', bottom: 0, right: '35%',
+    backgroundColor: '#3B82F6', width: 28, height: 28, borderRadius: 14,
+    justifyContent: 'center', alignItems: 'center',
+    borderWidth: 2, borderColor: '#FFFFFF',
   },
-  infoHeader: {
-    alignItems: 'center',
-  },
-  nombre: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#002E5D',
-    marginBottom: 5,
-  },
-  tituloRow: {
+  infoHeader: { alignItems: 'center' },
+  nombre: { fontSize: 22, fontWeight: 'bold', color: '#0F172A', marginBottom: 4, textAlign: 'center' },
+  tituloRow: { flexDirection: 'row', alignItems: 'center', marginBottom: 12, flexWrap: 'wrap', justifyContent: 'center' },
+  titulo: { fontSize: 15, color: '#64748B', marginRight: 8 },
+  badgeVerificado: { flexDirection: 'row', alignItems: 'center', backgroundColor: '#ECFDF5', paddingHorizontal: 8, paddingVertical: 4, borderRadius: 6, borderWidth: 1, borderColor: '#10B981' },
+  badgeTextoVerificado: { color: '#10B981', fontSize: 11, fontWeight: 'bold' },
+
+  badgesContainer: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', marginBottom: 15 },
+  badgeIndustria: { backgroundColor: '#F1F5F9', paddingHorizontal: 10, paddingVertical: 5, borderRadius: 6, margin: 4 },
+  badgeIndustriaTexto: { color: '#475569', fontSize: 12, fontWeight: '600' },
+
+  contactoContainer: { width: '100%', marginBottom: 20, backgroundColor: '#F8FAFC', padding: 15, borderRadius: 10 },
+  contactoRow: { flexDirection: 'row', alignItems: 'center', marginBottom: 8 },
+  contactoItem: { fontSize: 13, color: '#475569', marginLeft: 10 },
+
+  btnEditar: { flexDirection: 'row', backgroundColor: '#0F172A', paddingVertical: 12, paddingHorizontal: 25, borderRadius: 8, alignItems: 'center' },
+  btnEditarTexto: { color: '#FFFFFF', fontWeight: 'bold', fontSize: 14 },
+
+  sectionHeaderRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 15, borderBottomWidth: 1, borderBottomColor: '#F1F5F9', paddingBottom: 10 },
+  sectionTitleWrap: { flexDirection: 'row', alignItems: 'center' },
+  sectionIcon: { marginRight: 8 },
+  tituloSeccion: { fontSize: 16, fontWeight: 'bold', color: '#0F172A' },
+  btnAgregar: { width: 28, height: 28, borderRadius: 6, backgroundColor: '#3B82F6', justifyContent: 'center', alignItems: 'center' },
+  noBorder: { borderBottomWidth: 0, paddingBottom: 0, marginBottom: 0 },
+
+  progresoHeader: { flexDirection: 'row', justifyContent: 'space-between', marginBottom: 8 },
+  progresoLabel: { fontSize: 13, color: '#64748B', fontWeight: '600' },
+  progresoPorcentaje: { fontSize: 13, fontWeight: 'bold', color: '#3B82F6' },
+  barraProgresoBg: { height: 8, backgroundColor: '#E2E8F0', borderRadius: 4 },
+  barraProgresoFill: { height: 8, backgroundColor: '#3B82F6', borderRadius: 4 },
+
+  itemExperiencia: { marginBottom: 15, paddingBottom: 15, borderBottomWidth: 1, borderBottomColor: '#F1F5F9' },
+  puesto: { fontSize: 15, fontWeight: 'bold', color: '#0F172A' },
+  empresa: { fontSize: 13, color: '#3B82F6', marginTop: 2, fontWeight: '600' },
+  periodo: { fontSize: 12, color: '#94A3B8', marginTop: 2 },
+  descripcion: { fontSize: 13, color: '#475569', marginTop: 6, lineHeight: 18 },
+  logrosContainer: { marginTop: 8 },
+  logroRow: { flexDirection: 'row', alignItems: 'flex-start', marginTop: 4 },
+  logro: { fontSize: 12, color: '#64748B', marginLeft: 6, flex: 1 },
+
+  tagsContainer: { flexDirection: 'row', flexWrap: 'wrap' },
+  tagBadge: { backgroundColor: '#F8FAFC', paddingHorizontal: 12, paddingVertical: 6, borderRadius: 6, borderWidth: 1, borderColor: '#E2E8F0', marginRight: 8, marginBottom: 8 },
+  tagTexto: { color: '#0F172A', fontSize: 12, fontWeight: '600' },
+
+  habilidadItem: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingVertical: 10, borderBottomWidth: 1, borderBottomColor: '#F1F5F9' },
+  habilidadNombre: { fontSize: 14, color: '#475569', fontWeight: '500' },
+  nivelBadge: { paddingHorizontal: 8, paddingVertical: 4, borderRadius: 6 },
+  nivelExperto: { backgroundColor: '#DBEAFE' },
+  nivelBlackBelt: { backgroundColor: '#0F172A' },
+  nivelAvanzado: { backgroundColor: '#F1F5F9' },
+  nivelTexto: { color: '#0F172A', fontSize: 10, fontWeight: 'bold' },
+
+  itemLista: { paddingVertical: 12, borderBottomWidth: 1, borderBottomColor: '#F1F5F9' },
+  certHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 4 },
+  certNombre: { fontSize: 14, color: '#0F172A', fontWeight: '600', flex: 1 },
+  certTipoBadge: { backgroundColor: '#F8FAFC', paddingHorizontal: 8, paddingVertical: 4, borderRadius: 6, marginLeft: 8 },
+  certTipoTexto: { color: '#64748B', fontSize: 10, fontWeight: 'bold' },
+  certEntidad: { fontSize: 12, color: '#94A3B8' },
+
+  docRow: { flexDirection: 'row', alignItems: 'center' },
+  docInfo: { flex: 1 },
+  docNombre: { fontSize: 14, color: '#0F172A', fontWeight: '500' },
+  docMeta: { fontSize: 12, color: '#94A3B8', marginTop: 2 },
+
+  btnLogout: {
     flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 15,
-  },
-  titulo: {
-    fontSize: 16,
-    color: '#666',
-    marginRight: 10,
-  },
-  badgeVerificado: {
-    backgroundColor: '#E8F5E9',
-    paddingHorizontal: 8,
-    paddingVertical: 4,
+    backgroundColor: '#ff0000',
     borderRadius: 12,
-  },
-  badgeTexto: {
-    color: '#2E7D32',
-    fontSize: 12,
-    fontWeight: '500',
-  },
-  badgesContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-    marginBottom: 15,
-    gap: 8,
-  },
-  badgeIndustria: {
-    backgroundColor: '#E3F2FD',
-    paddingHorizontal: 12,
-    paddingVertical: 4,
-    borderRadius: 16,
-  },
-  badgeIndustriaTexto: {
-    color: '#002E5D',
-    fontSize: 12,
-    fontWeight: '500',
-  },
-  contactoContainer: {
-    width: '100%',
-    marginBottom: 15,
-  },
-  contactoItem: {
-    fontSize: 14,
-    color: '#666',
-    marginBottom: 5,
-  },
-  btnEditar: {
-    backgroundColor: '#F5F5F5',
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 20,
-    borderWidth: 1,
-    borderColor: '#002E5D',
-  },
-  btnEditarTexto: {
-    color: '#002E5D',
-    fontWeight: 'bold',
-    fontSize: 14,
-  },
-  seccion: {
-    backgroundColor: '#FFF',
-    padding: 20,
-    borderTopWidth: 1,
-    borderTopColor: '#EEE',
-  },
-  tituloRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 15,
-  },
-  tituloSeccion: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#002E5D',
-  },
-  btnAgregar: {
-    width: 30,
-    height: 30,
-    borderRadius: 15,
-    backgroundColor: '#002E5D',
+    paddingVertical: 15,
+    marginTop: 10,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  btnAgregarTexto: {
-    color: '#FFF',
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  progresoContainer: {
-    backgroundColor: '#F9F9F9',
-    padding: 15,
-    borderRadius: 10,
-  },
-  progresoHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 10,
-  },
-  progresoLabel: {
-    fontSize: 14,
-    color: '#666',
-  },
-  progresoPorcentaje: {
-    fontSize: 14,
-    fontWeight: 'bold',
-    color: '#002E5D',
-  },
-  barraProgreso: {
-    height: 8,
-    backgroundColor: '#E0E0E0',
-    borderRadius: 4,
-    marginBottom: 15,
-  },
-  barraProgresoFill: {
-    height: 8,
-    backgroundColor: '#002E5D',
-    borderRadius: 4,
-  },
-  checklist: {
-    gap: 5,
-  },
-  checkItem: {
-    fontSize: 13,
-    color: '#666',
-  },
-  itemExperiencia: {
-    marginBottom: 20,
-    paddingBottom: 15,
-    borderBottomWidth: 1,
-    borderBottomColor: '#F0F0F0',
-  },
-  puesto: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: '#333',
-  },
-  empresa: {
-    fontSize: 14,
-    color: '#666',
-    marginTop: 2,
-  },
-  periodo: {
-    fontSize: 13,
-    color: '#999',
-    marginTop: 2,
-  },
-  descripcion: {
-    fontSize: 13,
-    color: '#666',
-    marginTop: 5,
-    fontStyle: 'italic',
-  },
-  logrosContainer: {
-    marginTop: 8,
-    paddingLeft: 8,
-  },
-  logro: {
-    fontSize: 12,
-    color: '#666',
-    marginTop: 2,
-  },
-  clientesContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 8,
-  },
-  clienteBadge: {
-    backgroundColor: '#F5F5F5',
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-    borderRadius: 16,
     borderWidth: 1,
-    borderColor: '#002E5D',
+    borderColor: '#ff0000',
   },
-  clienteTexto: {
-    color: '#002E5D',
-    fontSize: 13,
-    fontWeight: '500',
-  },
-  habilidadItem: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingVertical: 8,
-    borderBottomWidth: 1,
-    borderBottomColor: '#F0F0F0',
-  },
-  habilidadNombre: {
-    fontSize: 15,
-    color: '#333',
-  },
-  nivelBadge: {
-    paddingHorizontal: 10,
-    paddingVertical: 4,
-    borderRadius: 12,
-  },
-  nivelExperto: {
-    backgroundColor: '#002E5D',
-  },
-  nivelBlackBelt: {
-    backgroundColor: '#2E7D32',
-  },
-  nivelAvanzado: {
-    backgroundColor: '#F57C00',
-  },
-  nivelTexto: {
-    color: '#FFF',
-    fontSize: 11,
-    fontWeight: '500',
-  },
-  itemCertificacion: {
-    marginBottom: 12,
-  },
-  certHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 4,
-  },
-  certNombre: {
-    fontSize: 15,
-    color: '#333',
-    fontWeight: '500',
-    flex: 1,
-  },
-  certTipoBadge: {
-    backgroundColor: '#E8F5E9',
-    paddingHorizontal: 8,
-    paddingVertical: 2,
-    borderRadius: 8,
+  btnLogoutText: {
+    color: '#ffffff',
+    fontSize: 16,
+    fontWeight: 'bold',
     marginLeft: 8,
-  },
-  certTipoTexto: {
-    color: '#2E7D32',
-    fontSize: 10,
-    fontWeight: '500',
-  },
-  certEntidad: {
-    fontSize: 13,
-    color: '#999',
-  },
-  itemDocumento: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingVertical: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: '#F0F0F0',
-  },
-  docInfo: {
-    flex: 1,
-  },
-  docNombre: {
-    fontSize: 15,
-    color: '#333',
-    fontWeight: '500',
-  },
-  docMeta: {
-    fontSize: 12,
-    color: '#999',
-    marginTop: 2,
-  },
-  badgeVerificadoDoc: {
-    backgroundColor: '#E8F5E9',
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    borderRadius: 8,
-  },
-  badgeTextoDoc: {
-    color: '#2E7D32',
-    fontSize: 11,
-    fontWeight: '500',
-  },
-  bottomNav: {
-    flexDirection: 'row',
-    backgroundColor: '#FFF',
-    borderTopWidth: 1,
-    borderTopColor: '#EEE',
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-  },
-  navItem: {
-    flex: 1,
-    alignItems: 'center',
-  },
-  navItemActivo: {
-    opacity: 1,
-  },
-  navIcon: {
-    fontSize: 20,
-    color: '#999',
-  },
-  navIconActivo: {
-    color: '#002E5D',
-  },
-  navText: {
-    fontSize: 11,
-    color: '#999',
-    marginTop: 2,
-  },
-  navTextActivo: {
-    color: '#002E5D',
-    fontWeight: '500',
-  },
-  bottomSpacer: {
-    height: 60,
-  },
+  }
 });
 
 export default ProfileScreen;
