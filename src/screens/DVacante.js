@@ -12,7 +12,7 @@ const DVacante = ({ route, navigation }) => {
             salary: '$180,000 - $220,000 MXN',
             type: 'Tiempo Completos',
             urgent: true,
-            time: 'Hace 2 días',
+            time: 'Hace 3 días',
             applicants: '12',
         }
     };
@@ -20,7 +20,7 @@ const DVacante = ({ route, navigation }) => {
     return (
         <SafeAreaView style={styles.mainContainer}>
             <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
-                
+
 
                 <View style={styles.card}>
                     <View style={styles.headerRow}>
@@ -129,10 +129,10 @@ const DVacante = ({ route, navigation }) => {
 const styles = StyleSheet.create({
     mainContainer: { flex: 1, backgroundColor: '#F1F5F9' },
     scrollContent: { padding: 16, paddingBottom: 100 },
-    card: { 
-        backgroundColor: '#FFF', 
-        borderRadius: 16, 
-        padding: 20, 
+    card: {
+        backgroundColor: '#FFF',
+        borderRadius: 16,
+        padding: 20,
         marginBottom: 16,
         elevation: 2,
         shadowColor: '#000',
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
     companyName: { fontSize: 16, color: '#64748B', marginVertical: 4 },
     urgentBadge: { backgroundColor: '#EF4444', paddingHorizontal: 8, paddingVertical: 4, borderRadius: 6, alignSelf: 'flex-start' },
     urgentText: { color: 'white', fontSize: 12, fontWeight: 'bold' },
-    
+
     infoList: { borderTopWidth: 1, borderTopColor: '#F1F5F9', paddingTop: 15 },
     detailRow: { flexDirection: 'row', alignItems: 'center', marginBottom: 10 },
     detailValue: { marginLeft: 10, color: '#475569', fontSize: 15 },
@@ -166,9 +166,9 @@ const styles = StyleSheet.create({
     stepLabel: { fontSize: 15, fontWeight: '600', color: '#0F172A' },
     stepTime: { fontSize: 12, color: '#94A3B8' },
 
-    applyButton: { 
+    applyButton: {
         position: 'absolute', bottom: 0, left: 0, right: 0,
-        backgroundColor: '#0F172A', padding: 20, alignItems: 'center' 
+        backgroundColor: '#0F172A', padding: 20, alignItems: 'center'
     },
     applyButtonText: { color: 'white', fontSize: 16, fontWeight: 'bold' }
 });
