@@ -4,7 +4,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 
 //IP conectada a Docker
-const API_URL = 'http://10.16.35.34:5000/api/certificaciones';
+const API_URL = 'http://10.16.37.73:5000/api/certificaciones';
 
 const ProfileScreen = ({ navigation, onLogout }) => {
   const [usuario] = useState({
@@ -223,7 +223,6 @@ const ProfileScreen = ({ navigation, onLogout }) => {
           )}
         </Seccion>
 
-        {/* BOTÓN CERRAR SESIÓN */}
         <TouchableOpacity style={styles.btnLogout} onPress={handleLogout}>
           <Text style={styles.btnLogoutText}>Cerrar Sesión</Text>
         </TouchableOpacity>
@@ -231,7 +230,6 @@ const ProfileScreen = ({ navigation, onLogout }) => {
         <View style={{ height: 30 }} />
       </ScrollView>
 
-      {/* --- MODAL DE CERTIFICACIONES --- */}
       <Modal animationType="slide" transparent={true} visible={modalVisible} onRequestClose={cerrarModal}>
         <View style={styles.modalOverlay}>
           <View style={styles.modalContent}>
@@ -267,13 +265,11 @@ const ProfileScreen = ({ navigation, onLogout }) => {
   );
 };
 
-// --- ESTILOS COMPLETOS ---
 const styles = StyleSheet.create({
   container: { flex: 1 },
   scrollContent: { padding: 15, paddingTop: 50 },
   card: { backgroundColor: '#FFFFFF', borderRadius: 16, padding: 20, marginBottom: 15, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.05, shadowRadius: 5, elevation: 3 },
 
-  // Estilos del Perfil
   fotoContainer: { alignItems: 'center', marginBottom: 15, position: 'relative' },
   fotoPlaceholder: { width: 90, height: 90, borderRadius: 45, backgroundColor: '#0F172A', justifyContent: 'center', alignItems: 'center', borderWidth: 3, borderColor: '#F1F5F9' },
   fotoPlaceholderText: { color: '#FFFFFF', fontSize: 36, fontWeight: 'bold' },
@@ -294,7 +290,6 @@ const styles = StyleSheet.create({
   contactoRow: { flexDirection: 'row', alignItems: 'center', marginBottom: 8 },
   contactoItem: { fontSize: 13, color: '#475569', marginLeft: 10 },
 
-  // Estilos de Secciones y Lista (CRUD)
   sectionHeaderRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 15, borderBottomWidth: 1, borderBottomColor: '#F1F5F9', paddingBottom: 10 },
   sectionTitleWrap: { flexDirection: 'row', alignItems: 'center' },
   sectionIcon: { marginRight: 8 },
@@ -312,7 +307,6 @@ const styles = StyleSheet.create({
   btnLogout: { backgroundColor: 'transparent', paddingVertical: 15, marginTop: 5, justifyContent: 'center', alignItems: 'center', borderWidth: 1, borderColor: '#EF4444', borderRadius: 12 },
   btnLogoutText: { color: '#EF4444', fontSize: 16, fontWeight: 'bold' },
 
-  // Estilos del Modal
   modalOverlay: { flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0,0,0,0.5)' },
   modalContent: { width: '85%', backgroundColor: 'white', borderRadius: 15, padding: 20 },
   modalTitulo: { fontSize: 18, fontWeight: 'bold', marginBottom: 15, color: '#0F172A', textAlign: 'center' },

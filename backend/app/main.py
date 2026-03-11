@@ -14,14 +14,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# --- 1. MODELO DE DATOS ---
+#MODELO DE DATOS
 class Certificacion(BaseModel):
     id: int
     nombre: str
     institucion: str
     anio: int
 
-# --- 2. BASE DE DATOS SIMULADA ---
+#BASE DE DATOS SIMULADA
 certificaciones_db = [
     Certificacion(id=1, nombre="Lean Six Sigma Black Belt", institucion="ASQ", anio=2024),
     Certificacion(id=2, nombre="PMP - Project Management", institucion="PMI", anio=2023),
@@ -55,7 +55,6 @@ def actualizar_certificacion(cert_id: int, cert_actualizada: Certificacion):
             
     raise HTTPException(status_code=404, detail="Certificación no encontrada.")
 
-#Borrar una certificación
 @app.delete("/api/certificaciones/{cert_id}", tags=["Certificaciones"])
 def eliminar_certificacion(cert_id: int):
     for index, item in enumerate(certificaciones_db):
