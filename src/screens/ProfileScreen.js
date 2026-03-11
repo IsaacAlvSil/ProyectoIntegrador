@@ -4,10 +4,9 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 
 //IP conectada a Docker
-const API_URL = 'http://10.16.36.57:5000/api/certificaciones';
+const API_URL = 'http://10.16.35.34:5000/api/certificaciones';
 
-const ProfileScreen = ({ navigation }) => {
-  //1. ESTADO DEL PERFIL PRINCIPAL
+const ProfileScreen = ({ navigation, onLogout }) => {
   const [usuario] = useState({
     nombre: 'Isaac',
     titulo: 'Director de Operaciones',
@@ -114,6 +113,24 @@ const ProfileScreen = ({ navigation }) => {
     setCertEditandoId(null);
   };
 
+  //AQUÍ DEBE IR LA NUEVA FUNCIÓN
+  const handleLogout = () => {
+    Alert.alert(
+      "Cerrar Sesión",
+      "¿Estás seguro de que deseas salir de tu cuenta?",
+      [
+        { text: "Cancelar", style: "cancel" },
+        {
+          text: "Sí, salir",
+          style: "destructive",
+          onPress: () => {
+            onLogout();
+          }
+        }
+      ]
+    );
+  };
+
   // Nuestro Componente Reutilizable
   const Seccion = ({ titulo, icon, children, onAgregar }) => (
     <View style={styles.card}>
@@ -207,7 +224,7 @@ const ProfileScreen = ({ navigation }) => {
         </Seccion>
 
         {/* BOTÓN CERRAR SESIÓN */}
-        <TouchableOpacity style={styles.btnLogout} onPress={() => console.log('Cerrando sesion')}>
+        <TouchableOpacity style={styles.btnLogout} onPress={handleLogout}>
           <Text style={styles.btnLogoutText}>Cerrar Sesión</Text>
         </TouchableOpacity>
 

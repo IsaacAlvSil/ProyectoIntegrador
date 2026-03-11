@@ -15,7 +15,7 @@ import RecoverPasswordScreen from '../screens/RecoverPasswordScreen';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
-function MainTabs() {
+function MainTabs({ onLogout }) {
     return (
         <Tab.Navigator
             screenOptions={({ route }) => ({
@@ -36,12 +36,15 @@ function MainTabs() {
             <Tab.Screen name="Home" component={HomeScreen} options={{ title: 'Dashboard' }} />
             <Tab.Screen name="Solicitudes" component={RequestsScreen} options={{ title: 'Vacantes' }} />
             <Tab.Screen name="Notificaciones" component={NotificationsScreen} />
-            <Tab.Screen name="Perfil" component={ProfileScreen} />
+
+            <Tab.Screen name="Perfil">
+                {(props) => <ProfileScreen {...props} onLogout={onLogout} />}
+            </Tab.Screen>
         </Tab.Navigator>
     );
 }
 
-export default function AppNavigation({ isLoggedIn, onLogin }) {
+export default function AppNavigation({ isLoggedIn, onLogin, onLogout }) {
     return (
         <Stack.Navigator screenOptions={{ headerShown: false }}>
             {!isLoggedIn ? (
@@ -54,8 +57,9 @@ export default function AppNavigation({ isLoggedIn, onLogin }) {
                 </>
             ) : (
                 <>
-
-                    <Stack.Screen name="Main" component={MainTabs} />
+                    <Stack.Screen name="Main">
+                        {(props) => <MainTabs {...props} onLogout={onLogout} />}
+                    </Stack.Screen>
 
                     <Stack.Screen
                         name="DVacante"
