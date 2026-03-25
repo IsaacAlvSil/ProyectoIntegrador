@@ -10,6 +10,7 @@ import ProfileScreen from '../screens/ProfileScreen';
 import NotificationsScreen from '../screens/NotificationsScreen';
 import RequestsScreen from '../screens/RequestsScreen';
 import DVacante from '../screens/DVacante';
+import RadarScreen from '../screens/RadarScreen';
 import RecoverPasswordScreen from '../screens/RecoverPasswordScreen';
 
 const Stack = createStackNavigator();
@@ -69,6 +70,18 @@ export default function AppNavigation({ isLoggedIn, onLogin, onLogout }) {
                             title: 'Detalle de Vacante',
                             headerStyle: { backgroundColor: '#0F172A' },
                             headerTintColor: '#fff'
+                        }}
+                    />
+
+                    <Stack.Screen
+                        name="RadarDetalle"
+                        component={RadarScreen}
+                        options={{
+                            headerShown: true,
+                            title: 'Radar Automotriz',
+                            headerStyle: { backgroundColor: '#0F172A' },
+                            headerTintColor: '#fff',
+                            headerBackTitleVisible: false
                         }}
                     />
                 </>

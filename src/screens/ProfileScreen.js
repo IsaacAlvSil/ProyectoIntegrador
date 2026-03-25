@@ -4,7 +4,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 
 //IP conectada a Docker
-const API_URL = 'http://10.16.37.73:5000/api/certificaciones';
+const API_URL = 'http://10.16.35.180:5000/api/certificaciones';
 
 const ProfileScreen = ({ navigation, onLogout }) => {
   const [usuario] = useState({
