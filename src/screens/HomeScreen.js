@@ -83,7 +83,11 @@ const HomeScreen = ({ navigation }) => {
                 <View style={styles.sectionHeader}>
                     <Text style={styles.sectionTitle}>Radar Automotriz (Bajío)</Text>
                 </View>
-                <TouchableOpacity style={styles.newsCard}>
+
+                <TouchableOpacity
+                    style={styles.newsCard}
+                    onPress={() => navigation.navigate('RadarDetalle')}
+                >
                     <Ionicons name="trending-up-outline" size={24} color="#6366F1" style={styles.newsIcon} />
                     <View style={styles.newsTextContainer}>
                         <Text style={styles.newsTitle}>Nueva inversión en El Marqués</Text>

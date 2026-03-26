@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, SafeAreaView } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, SafeAreaView, Alert } from 'react-native';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 
 const DVacante = ({ route, navigation }) => {
@@ -15,6 +15,19 @@ const DVacante = ({ route, navigation }) => {
             time: 'Hace 3 días',
             applicants: '12',
         }
+    };
+
+    const handlePostulacion = () => {
+        Alert.alert(
+            "¡Postulación Exitosa!",
+            `Tu CV ha sido enviado correctamente para la vacante de ${vacante.title} en ${vacante.company}.`,
+            [
+                {
+                    text: "Excelente",
+                    style: "default",
+                }
+            ]
+        );
     };
 
     return (
@@ -119,7 +132,11 @@ const DVacante = ({ route, navigation }) => {
 
             </ScrollView>
 
-            <TouchableOpacity style={styles.applyButton} activeOpacity={0.8}>
+            <TouchableOpacity
+                style={styles.applyButton}
+                activeOpacity={0.8}
+                onPress={handlePostulacion}
+            >
                 <Text style={styles.applyButtonText}>Postularme a esta vacante</Text>
             </TouchableOpacity>
         </SafeAreaView>
